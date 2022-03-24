@@ -7,6 +7,7 @@ To show your git skills, please upload the application to your GitHub repo. Don�
 about clean commit messages and branch names.
 
 Requirements:
+
 ● The application should use PostgreSQL
 
 ● Basic authentication using devise gem
