@@ -1,4 +1,8 @@
-<h1 class="text-center">Welcome to Merchants</h1>
+<h1 class="text-center">Welcome 
+<% if user_signed_in? %>
+<small class="text-muted"><%= current_user.role %></small> : <em><%= current_user.nickname %></em> - <mark><%= current_user.email %></mark>
+<% end %>
+to Merchants</h1>
 <div class="mx-auto" style="width: 50%;">
 <%= image_tag 'merchants', height: '100%', width: '100%'%>
 </div>
