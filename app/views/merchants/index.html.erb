@@ -2,7 +2,9 @@
 
 <h1>Merchants</h1>
 
-<table>
+<%= link_to 'New Merchant', new_merchant_path, class: 'btn btn-primary' %>
+
+<table class="table table-success table-striped table-hover table-borderless">
   <thead>
     <tr>
       <th>Name</th>
@@ -17,14 +19,20 @@
   <tbody>
     <% @merchants.each do |merchant| %>
       <tr>
-        <td><%= merchant.name %></td>
+        <td><%= link_to merchant.name, merchant %></td>
         <td><%= merchant.city %></td>
         <td><%= merchant.street %></td>
         <td><%= merchant.country_code %></td>
         <td><%= merchant.extra_info %></td>
-        <td><%= link_to 'Show', merchant %></td>
-        <td><%= link_to 'Edit', edit_merchant_path(merchant) %></td>
-        <td><%= link_to 'Destroy', merchant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to  edit_merchant_path(merchant) do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
+        </td>
+        <td><%= link_to merchant, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fas fa-trash-alt"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +40,3 @@
 
 <br>
 
-<%= link_to 'New Merchant', new_merchant_path %>
