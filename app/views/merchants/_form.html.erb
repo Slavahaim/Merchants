@@ -1,0 +1,43 @@
+<%= form_with(model: merchant) do |form| %>
+  <% if merchant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(merchant.errors.count, "error") %> prohibited this merchant from being saved:</h2>
+
+      <ul>
+        <% merchant.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, placeholder: "Name", class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, placeholder: "City", class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :street %>
+    <%= form.text_field :street, placeholder: "Street", class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country_code %>
+    <%= form.text_field :country_code, placeholder: "Country Code", class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_info %>
+    <%= form.text_field :extra_info, placeholder: "Country Code", class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn btn-outline-success">Save </button>
+    <%= link_to 'Back', merchants_path, class: "btn btn-outline-info" %>
+  </div>
+<% end %>
