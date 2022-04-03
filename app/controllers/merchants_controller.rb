@@ -4,7 +4,7 @@ class MerchantsController < ApplicationController
 
   # GET /merchants or /merchants.json
   def index
-    @merchants = Merchant.order(id: :asc)
+    @merchants = Merchant.search(params[:search])
   end
 
   # GET /merchants/1 or /merchants/1.json
@@ -65,6 +65,6 @@ class MerchantsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def merchant_params
-    params.require(:merchant).permit(:name, :city, :street, :country_code, :extra_info)
+    params.require(:merchant).permit(:name, :city, :street, :country_code, :extra_info, :search)
   end
 end
