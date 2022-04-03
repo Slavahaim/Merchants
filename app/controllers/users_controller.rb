@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
-    @users = User.order(id: :asc, role: :asc)
+    @users = User.order(role: :asc, id: :asc)
   end
 
   def show
