@@ -16,7 +16,13 @@ class MerchantsController < ApplicationController
   end
 
   # GET /merchants/1/edit
-  def edit; end
+  def edit
+    if current_user.role_admin?
+      @merchant = Merchant.find_by_id(params[:id])
+    else
+      redirect_to @merchant, alert: 'Admin not authrized'
+    end
+  end
 
   # POST /merchants or /merchants.json
   def create
@@ -48,11 +54,15 @@ class MerchantsController < ApplicationController
 
   # DELETE /merchants/1 or /merchants/1.json
   def destroy
-    @merchant.destroy
+    if current_user.role_admin?
+      @merchant.destroy
 
-    respond_to do |format|
-      format.html { redirect_to merchants_url, notice: 'Merchant was successfully destroyed.' }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to merchants_url, notice: 'Merchant was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to merchants_url, alert: 'Admin not authrized'
     end
   end
 
