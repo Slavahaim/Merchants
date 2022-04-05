@@ -14,7 +14,13 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit; end
+  def edit
+    if current_user.role_admin?
+      @user = User.find_by_id(params[:id])
+    else
+      redirect_to @user, alert: 'Admin not authrized'
+    end
+  end
 
   def create
     @user = User.new(user_params)
@@ -43,10 +49,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user.role_admin?
+      @user.destroy
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to users_url, alert: 'Admin not authrized'
     end
   end
 
