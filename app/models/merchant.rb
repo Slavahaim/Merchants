@@ -8,11 +8,11 @@ class Merchant < ApplicationRecord
 
   def self.search(search)
     if search
-      merchant_name = Merchant.find_by(name: search.capitalize)
+      merchant_name = Merchant.find_by(name: search)
       if merchant_name
         where(id: merchant_name)
       else
-        @merchants = Merchant.order(id: :asc)
+        @merchants = Merchant.order(id: :desc)
       end
     else
       @merchants = Merchant.order(id: :asc)
